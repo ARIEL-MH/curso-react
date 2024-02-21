@@ -7,7 +7,7 @@ import { useState } from "react";
 //   _embedded: { events },
 // } = data;
 
-function Events() {
+function Events({ searchTerm }) {
   const [data, setData] = useState(eventsJson);
 
   const {
@@ -18,29 +18,39 @@ function Events() {
     console.log("evento clickeado", id);
   }
 
+  function renderEvents() {
+    let eventsFiltered = events;
+
+    if (searchTerm.length > 0) {
+      eventsFiltered = eventsFiltered.filter(
+        //
+        (item) => item.name.toLowerCase().includes(searchTerm)
+      );
+    }
+
+    return eventsFiltered.map(
+      //
+      (eventItem) => (
+        <EventItem
+          //onEventClick asi nombrar a el evento
+          key={`events-item-${eventItem.id}`}
+          id={eventItem.id}
+          name={eventItem.name}
+          info={eventItem.info}
+          image={eventItem.images[0].url}
+          onEventClick={handleEventItemClick}
+          //cuando los nombres de los eventos sean pasados por propiedades tiene que ser on
+        />
+      )
+    );
+  }
+
   return (
     <div>
       <p>Eventos</p>
-      {events.map(
-        //
-        (eventItem) => (
-          <EventItem
-            //onEventClick asi nombrar a el evento
-            key={`events-item-${eventItem.id}`}
-            id={eventItem.id}
-            name={eventItem.name}
-            info={eventItem.info}
-            image={eventItem.images[0].url}
-            onEventClick={handleEventItemClick}
-            //cuando los nombres de los eventos sean pasados por propiedades tiene que ser on
-          />
-        )
-      )}
+      {renderEvents()}
     </div>
   );
 }
 
 export default Events;
-
-//cuando la informacion tiende a cambiar de momento la info es estatica pero no tiene nada de malo si lo quieres guardar en un state
-//la diferemcia es que eso no va actualizarse uso del estado sin actualizarse no que esta fuera de la funcion no es reactivo
