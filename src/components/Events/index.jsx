@@ -14,22 +14,28 @@ function Events() {
     _embedded: { events },
   } = data;
 
-  const eventsComponent = events.map(
-    //
-    (eventItem) => (
-      <EventItem
-        //
-        key={`events-item-${eventItem.id}`}
-        name={eventItem.name}
-        info={eventItem.info}
-        image={eventItem.images[0].url}
-      />
-    )
-  );
+  function handleEventItemClick(id) {
+    console.log("evento clickeado", id);
+  }
+
   return (
     <div>
       <p>Eventos</p>
-      {eventsComponent}
+      {events.map(
+        //
+        (eventItem) => (
+          <EventItem
+            //onEventClick asi nombrar a el evento
+            key={`events-item-${eventItem.id}`}
+            id={eventItem.id}
+            name={eventItem.name}
+            info={eventItem.info}
+            image={eventItem.images[0].url}
+            onEventClick={handleEventItemClick}
+            //cuando los nombres de los eventos sean pasados por propiedades tiene que ser on
+          />
+        )
+      )}
     </div>
   );
 }
