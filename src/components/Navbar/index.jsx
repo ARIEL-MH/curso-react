@@ -1,7 +1,7 @@
 function Navbar() {
   return (
     <div>
-      <p>Eventos</p>
+      <p>Mi boletera</p>
       <input type="text" placeholder="Busca tu evento favorito" />
     </div>
   );
