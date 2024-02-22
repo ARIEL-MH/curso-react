@@ -19,9 +19,11 @@ function Events({ searchTerm }) {
   }
 
   function renderEvents() {
+    //cuando yo creo una funcion que va renderizar un componente pongo render
     let eventsFiltered = events;
 
     if (searchTerm.length > 0) {
+      //estoy filtrando
       eventsFiltered = eventsFiltered.filter(
         //
         (item) => item.name.toLowerCase().includes(searchTerm)
