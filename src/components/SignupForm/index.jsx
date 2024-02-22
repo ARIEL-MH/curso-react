@@ -1,94 +1,49 @@
-import { useState } from "react";
 import "./styles.css";
+import { useForm } from "react-hook-form";
 
 const SingupForm = () => {
-  const [name, setName] = useState("");
-  const [age, setAge] = useState("");
-  const [address, setAddress] = useState("");
-  const [zipcode, setZipcode] = useState("");
-  const [phone, setPhone] = useState("");
-  <br />;
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   function handleClearClick() {
-    setName("");
-    setAge("");
-    setAddress("");
-    setZipcode("");
-    setPhone("");
+    reset();
   }
 
-  function handleSubmitForm(evt) {
-    //aqui paso algo raro se actualizo la web y eso es un error
-    evt.preventDefault(); //solucion
-    console.log("Submit", {
-      name,
-      age,
-      address,
-      phone,
-      zipcode,
-    });
+  function handleSubmitForm(data) {
+    console.log(data);
   }
+
+  console.log(errors);
 
   return (
-    <form onSubmit={handleSubmitForm} className="form">
+    <form onSubmit={handleSubmit(handleSubmitForm)} className="form">
       <label>
         Name
-        <input
-          value={name}
-          onChange={
-            //
-            (evt) => setName(evt.target.value)
-          }
-          required
-        />
+        <input {...register("name", { required: true })} />
       </label>
       <br />
       <label>
         Age
-        <input
-          value={age}
-          onChange={
-            //
-            (evt) => setAge(evt.target.value)
-          }
-          required
-        />
+        <input type="number" {...register("name", { required: true })} />
       </label>
       <br />
       <label>
         Address
-        <input
-          value={address}
-          onChange={
-            //
-            (evt) => setAddress(evt.target.value)
-          }
-          required
-        />
+        <input {...register("address", { required: true })} />
       </label>
       <br />
       <label>
         Zipcode
-        <input
-          value={zipcode}
-          onChange={
-            //
-            (evt) => setZipcode(evt.target.value)
-          }
-          required
-        />
+        <input {...register("zipcode", { required: true })} />
       </label>
       <br />
       <label>
         Phone
-        <input
-          value={phone}
-          onChange={
-            //
-            (evt) => setPhone(evt.target.value)
-          }
-          required
-        />
+        <input {...register("phone", { required: true })} />
       </label>
       <div>
         <button type="button" onClick={handleClearClick}>
@@ -99,5 +54,5 @@ const SingupForm = () => {
     </form>
   );
 };
+
 export default SingupForm;
-//6.53
