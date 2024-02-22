@@ -2,6 +2,8 @@ import "./styles.css";
 import { useForm } from "react-hook-form";
 
 const SingupForm = () => {
+  // hooks llamados en la parte superior de los componentes
+
   const {
     register,
     handleSubmit,
@@ -16,8 +18,6 @@ const SingupForm = () => {
   function handleSubmitForm(data) {
     console.log(data);
   }
-
-  console.log(errors);
 
   return (
     <form onSubmit={handleSubmit(handleSubmitForm)} className="form">
