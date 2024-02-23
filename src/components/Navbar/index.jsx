@@ -3,12 +3,21 @@ import { useState, useEffect } from "react";
 function Navbar({ onSearch }) {
   const [search, setSearch] = useState("");
 
+  /*
+  puedes tener n cantidad de hooks
+  useEffect(
+    () => {
+      console.log("1010 effect");
+    }, //
+    [search, onSearch] //ojo cuando se produsca una actualizacion del hijo al padre
+  );
+  
   useEffect(
     () => {
       console.log("onSearch cambio");
     }, //
-    [onSearch]
-  );
+    [onSearch] //ojo cuando se produsca una actualizacion del hijo al padre
+  ); 
 
   useEffect(
     () => {
@@ -23,6 +32,7 @@ function Navbar({ onSearch }) {
     }, //
     [search]
   );
+ */
 
   function handleInputChange(evt) {
     setSearch(evt.target.value);
@@ -51,4 +61,5 @@ function Navbar({ onSearch }) {
     </div>
   );
 }
+
 export default Navbar;
