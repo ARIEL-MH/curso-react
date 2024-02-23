@@ -1,23 +1,34 @@
 import eventsJson from "../data/events.json";
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 
 function useEventsData() {
-  //ojo si quiero cambiar useState x useRef tengo que preguntamer que erros me van a dar cuando no estamos usando setData
-  const data = useRef([]);
-
-  //voy hacer un cargado fictisio despues de 5 segundos
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState();
   useEffect(
-    //informacion de la api
+    //
     () => {
-      setTimeout(() => {
-        data.current = eventsJson;
-      }, 4000);
-      //LOAD API CALL
+      setTimeout(
+        //
+        () => {
+          try {
+            setData(eventsJson);
+            setIsLoading(false);
+          } catch (error) {
+            setError(error);
+          }
+        },
+        4000
+      );
     },
     []
   );
-  console.log(data.current); // referencia actualizada no vuelve actualizar el componente hooks producen re-render
-  return { events: data.current?._embedded?.events || [] };
+  return {
+    //
+    events: data._embedded?.events || [],
+    isLoading,
+    error,
+  };
 }
 
 export default useEventsData;

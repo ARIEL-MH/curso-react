@@ -1,38 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, forwardRef } from "react";
 
-function Navbar({ onSearch }) {
+const Navbar = forwardRef(({ onSearch }, ref) => {
   const [search, setSearch] = useState("");
-
-  /*
-  puedes tener n cantidad de hooks
-  useEffect(
-    () => {
-      console.log("1010 effect");
-    }, //
-    [search, onSearch] //ojo cuando se produsca una actualizacion del hijo al padre
-  );
-  
-  useEffect(
-    () => {
-      console.log("onSearch cambio");
-    }, //
-    [onSearch] //ojo cuando se produsca una actualizacion del hijo al padre
-  ); 
-
-  useEffect(
-    () => {
-      console.log("Componente listo");
-    }, //
-    []
-  );
-
-  useEffect(
-    () => {
-      console.log("serach cambio");
-    }, //
-    [search]
-  );
- */
 
   function handleInputChange(evt) {
     setSearch(evt.target.value);
@@ -48,7 +17,7 @@ function Navbar({ onSearch }) {
   }
 
   return (
-    <div>
+    <div ref={ref}>
       <p>Mi boletera</p>
       <input
         type="text"
@@ -60,6 +29,8 @@ function Navbar({ onSearch }) {
       />
     </div>
   );
-}
+});
+
+Navbar.displayName = "Navbar";
 
 export default Navbar;
