@@ -19,16 +19,48 @@ const Navbar = forwardRef(({ onSearch }, ref) => {
   }
 
   return (
-    <div ref={ref}>
-      <p>Mi boletera</p>
-      <input
-        type="text"
-        placeholder="Busca tu evento favorito"
-        onChange={handleInputChange}
-        onKeyDown={handleInputKeyDown}
-        /*Lo que hicimos fue detectar si la tecla es enter entonces vamos a ejecutar una busqueda*/
-        value={search}
-      />
+    <div
+      ref={ref}
+      style={
+        //
+        { marginBottom: "14px", width: "100%", display: "flex" }
+      }
+    >
+      <div
+        style={
+          //
+          { flex: 1, display: "flex" }
+        }
+      >
+        <p style={{ fontSize: 24, fontWeight: "bold" }}>Mi boletera</p>
+      </div>
+      <div
+        style={
+          //
+          {
+            flex: 1,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-end",
+          }
+        }
+      >
+        <input
+          type="text"
+          placeholder="Busca tu evento favorito"
+          onChange={handleInputChange}
+          onKeyDown={handleInputKeyDown}
+          /*Lo que hicimos fue detectar si la tecla es enter entonces vamos a ejecutar una busqueda*/
+          value={search}
+          style={{
+            fontSize: "16px",
+            padding: "6px 12px",
+            border: "none",
+            borderRadius: "4px",
+            width: 200,
+          }}
+        />
+      </div>
     </div>
   );
 });
