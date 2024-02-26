@@ -1,13 +1,14 @@
 import EventItem from "./components/EventItem";
-
+import { useNavigate } from "react-router-dom";
 import useEventsData from "../../hooks/useEventsData";
 
 function Events({ searchTerm }) {
   //
   const { events, isLoading, error } = useEventsData();
+  const navigate = useNavigate();
 
   function handleEventItemClick(id) {
-    console.log("evento clickeado", id);
+    navigate(`detail/${id}`);
   }
 
   function renderEvents() {
