@@ -1,29 +1,32 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function useEventsData() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const response = await fetch(
-          "https://app.ticketmaster.com/discovery/v2/events.json?apikey=GXLc51KXkIk9KT9CqlQnebmD2FDDvW2n&countryCode=MX"
-        );
-        const data = await response.json();
-        setData(data);
-        setIsLoading(false);
-      } catch (e) {
-        setError(e);
-      }
-    };
-    fetchEvents();
-  }, []);
+
+  const fetchEvents = async (params) => {
+    try {
+      const response = await fetch(
+        `https://app.ticketmaster.com/discovery/v2/events.json?apikey=GXLc51KXkIk9KT9CqlQnebmD2FDDvW2n&countryCode=MX${
+          params?.length ? params : ""
+        }`
+      );
+      const data = await response.json();
+      setData(data);
+      setIsLoading(false);
+    } catch (e) {
+      console.log(e);
+      setError(e);
+    }
+  };
+
   return {
     //
     events: data._embedded?.events || [],
     isLoading,
     error,
+    fetchEvents,
   };
 }
 
