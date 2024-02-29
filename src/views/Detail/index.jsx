@@ -4,16 +4,13 @@ import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import styles from "./Detail.module.css";
 
-import useEventsResults from "../../state/events-results";
-
 const Detail = () => {
-  const { data } = useEventsResults();
   const { eventId } = useParams();
   const [eventData, setEventData] = useState({});
   const [error, setError] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log(data);
+  // console.log(data);
 
   useEffect(() => {
     const fetchEventData = async () => {
