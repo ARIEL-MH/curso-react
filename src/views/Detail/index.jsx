@@ -3,17 +3,20 @@ import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import styles from "./Detail.module.css";
+
 const Detail = () => {
   const { eventId } = useParams();
   const [eventData, setEventData] = useState({});
   const [error, setError] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  // console.log(eventId);
+
   useEffect(() => {
     const fetchEventData = async () => {
       try {
         const response = await fetch(
-          `https://app.ticketmaster.com/discovery/v2/events/${eventId}?apikey=GXLc51KXkIk9KT9CqlQnebmD2FDDvW2n`
+          `https://app.ticketmaster.com/discovery/v2/events/${eventId}?apikey=${
+            import.meta.env.VITE_API_KEY_TICKETMASTER
+          }`
         );
         const data = await response.json();
         setEventData(data);
@@ -26,7 +29,6 @@ const Detail = () => {
     fetchEventData();
   }, []);
 
-  console.log(eventData);
   if (isLoading && Object.keys(eventData) === 0) {
     return <div>Cargando evento...</div>;
   }
@@ -61,7 +63,7 @@ const Detail = () => {
         <img
           src={eventData.seatmap?.staticUrl}
           alt="Seatmap event"
-          srcset=""
+          // srcset=""
           width={500}
         />
         <p className={styles.pleaseNoteLegend}>{eventData.pleaseNote}</p>
