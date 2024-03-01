@@ -58,7 +58,7 @@ const MyInfo = () => {
           type="number"
         />
       </label>
-      <button>Save</button>
+      <button className={styles.btn}>Save</button>
     </form>
   );
 };
