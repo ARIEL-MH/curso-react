@@ -3,7 +3,7 @@ import Home from "../views/Home";
 import Detail from "../views/Detail";
 import Error404 from "../views/Error404";
 import Profile from "../views/Profile";
-import Myinfo from "../views/Profile/components/Myinfo";
+import MyInfo from "../views/Profile/components/MyInfo";
 import LikedEvents from "../views/Profile/components/LikedEvents";
 
 const router = createBrowserRouter([
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
       //
       {
         path: "my-info",
-        element: <Myinfo />,
+        element: <MyInfo />,
       },
       {
         path: "liked-events",
